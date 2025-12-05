@@ -8,8 +8,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  /* set tailwind's font-sans to your local font */
+  --font-sans: var(--font-ibm-plex-sans-kr);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +20,14 @@
   }
 }
 
+/* IMPORTANT: use the CSS variable injected by next/font/local */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+  font-family:
+    var(--font-ibm-plex-sans-kr), /* your Next.js localFont */
+    Helvetica,
+    Arial,
+    sans-serif;
 }
