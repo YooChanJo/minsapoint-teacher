@@ -1,0 +1,31 @@
+# Node and build artifacts
+node_modules/
+build/
+coverage/
+dist/
+# etc
+.next/
+public/
+
+# System files
+.DS_Store
+.env
+.env.*  
+
+# Assets (if you don’t want Prettier touching them)
+*.png
+*.jpg
+*.svg
+*.ico
+*.ttf
+*.otf
+
+
+# Ignore generated JavaScript bundles
+*.bundle
+
+# Logs
+*.log
+
+# Prettier config itself
+.prettierignore

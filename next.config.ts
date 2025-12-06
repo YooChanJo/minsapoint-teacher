@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   // cacheComponents: true,
   experimental: {
     turbopackFileSystemCacheForDev: true, // faster building for dev
-  }
+  },
 };
 
 export default nextConfig;

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
-
+import { AuthProvider } from "./components/auth-provider";
+import { ThemeProvider } from "next-themes";
 
 const ibmPlexSansKr = localFont({
   src: [
@@ -34,10 +35,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${ibmPlexSansKr.variable} antialiased`}
-      >
-        {children}
+      <body className={`${ibmPlexSansKr.variable} antialiased`}>
+        <AuthProvider>
+          <ThemeProvider attribute="class">{children}</ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );

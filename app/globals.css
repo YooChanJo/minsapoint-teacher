@@ -26,8 +26,8 @@ body {
   color: var(--foreground);
 
   font-family:
-    var(--font-ibm-plex-sans-kr), /* your Next.js localFont */
-    Helvetica,
+    var(--font-ibm-plex-sans-kr),
+    /* your Next.js localFont */ Helvetica,
     Arial,
     sans-serif;
 }
