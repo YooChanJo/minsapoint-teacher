@@ -21,19 +21,21 @@ export default function Header() {
   }, [accessToken]);
 
   return (
-    <header
-      className="
-        w-full
-        border-b
-        flex items-center justify-between
-        px-4 py-3
-        shadow-sm
-      "
-      style={{
-        backgroundColor: "var(--color-surface)",
-        borderColor: "var(--color-border)",
-      }}
-    >
+<header
+  className="
+    w-full
+    fixed top-0 left-0 z-50
+    border-b
+    flex items-center justify-between
+    px-4 py-3
+    shadow-sm
+  "
+  style={{
+    backgroundColor: "var(--color-surface)",
+    borderColor: "var(--color-border)",
+  }}
+>
+
       {/* Left Section - Logo */}
       <Link href="/" className="flex items-center gap-2 group">
         <h1
