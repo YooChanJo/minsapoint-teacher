@@ -1,71 +1,42 @@
 "use client";
 
+import AccusationAPI, { BackendAccusation } from "@/app/api/accusation";
+import UserAPI from "@/app/api/user";
 import { useAuth } from "@/app/components/auth-provider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-interface HistoryItem {
-  title: string;
-  people: string;
+interface HistoryItemType extends BackendAccusation {
+  defendantName: string;
 }
 
 export default function HistoryPage() {
   const { accessToken } = useAuth();
+  const [historyList, setHistoryList] = useState<HistoryItemType[]>([]);
 
-  const historyList: HistoryItem[] = [
-    {
-      title: "Abasent from morning exercise",
-      people: "정창윤 외 10명",
-    },
-    {
-      title: "Outdoor Regulation",
-      people: "28조유찬, 28정창윤",
-    },
-    {
-      title: "Outdoor Regulation",
-      people: "28조유찬, 28정창윤",
-    },
-        {
-      title: "Abasent from morning exercise",
-      people: "정창윤 외 10명",
-    },
-    {
-      title: "Outdoor Regulation",
-      people: "28조유찬, 28정창윤",
-    },
-    {
-      title: "Outdoor Regulation",
-      people: "28조유찬, 28정창윤",
-    },
-        {
-      title: "Abasent from morning exercise",
-      people: "정창윤 외 10명",
-    },
-    {
-      title: "Outdoor Regulation",
-      people: "28조유찬, 28정창윤",
-    },
-    {
-      title: "Outdoor Regulation",
-      people: "28조유찬, 28정창윤",
-    },
-        {
-      title: "Abasent from morning exercise",
-      people: "정창윤 외 10명",
-    },
-    {
-      title: "Outdoor Regulation",
-      people: "28조유찬, 28정창윤",
-    },
-    {
-      title: "Outdoor Regulation",
-      people: "28조유찬, 28정창윤",
-    },
-  ];
+  useEffect(() => {
+    async function init() {
+      try {
+        const userInfo = await UserAPI.getCurrentUserInfo(accessToken);
+        const response = await AccusationAPI.getAccusationsFromCurrentUser(
+          { accuserId: userInfo._id },
+          accessToken
+        );
+        const updatedAccusations: HistoryItemType[] = await Promise.all(response.map(async (accusation) => {
+          const defendantName = await UserAPI.getUserNameFromID(accusation.defendantId, accessToken);
+          return { ...accusation, defendantName };
+        }));
+        setHistoryList(updatedAccusations);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    init();
+  });
 
   const [openModal, setOpenModal] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<HistoryItem | null>(null);
+  const [selectedItem, setSelectedItem] = useState<HistoryItemType | null>(null);
 
-  const open = (item: HistoryItem) => {
+  const open = (item: HistoryItemType) => {
     setSelectedItem(item);
     setOpenModal(true);
   };
@@ -75,16 +46,21 @@ export default function HistoryPage() {
     setSelectedItem(null);
   };
 
-  const handleCancel = () => {
-    console.log("취하됨:", selectedItem);
-    setOpenModal(false);
+  const handleWithdrawal = async () => {
+    try {
+      if(!selectedItem) throw new Error("Item not selected");
+      const response = await AccusationAPI.editAccusationFromCurrentUser(selectedItem._id, { valid: false }, accessToken);
+      response;
+    } catch (e) {
+      throw e;
+    } finally {
+      setOpenModal(false);
+    }
   };
 
   return (
     <div className="w-full min-h-screen bg-[var(--background)] px-4 py-6">
-      <h1 className="text-xl font-bold mb-6 text-[var(--color-text)]">
-        History
-      </h1>
+      <h1 className="text-xl font-bold mb-6 text-[var(--color-text)]">History</h1>
 
       <div className="flex flex-col gap-4">
         {historyList.map((item, idx) => (
@@ -101,12 +77,9 @@ export default function HistoryPage() {
               active:scale-[0.98]
             "
           >
-            <div className="text-lg font-bold text-[var(--color-text)]">
-              {item.title}
-            </div>
-            <div className="text-sm text-[var(--color-text-subtle)] mt-1">
-              {item.people}
-            </div>
+            <div className="text-lg font-bold text-[var(--color-text)]">{item.article}</div>
+            <div className="text-sm text-[var(--color-text-subtle)] mt-1">{item.defendantName}</div>
+            <div className="text-sm text-[var(--color-text-subtle)] mt-1">{item.date.split("T")[0]}</div>
           </button>
         ))}
       </div>
@@ -132,16 +105,13 @@ export default function HistoryPage() {
             "
             style={{ animation: "scaleIn 0.2s ease-out" }}
           >
-            <h2 className="text-lg font-bold text-[var(--color-text)]">
-              {selectedItem.title}
-            </h2>
-            <p className="text-sm text-[var(--color-text-subtle)] mt-2">
-              {selectedItem.people}
-            </p>
+            <h2 className="text-lg font-bold text-[var(--color-text)]">{selectedItem.article}</h2>
+            <p className="text-sm text-[var(--color-text-subtle)] mt-2">{selectedItem.defendantName}</p>
+            <p className="text-sm text-[var(--color-text-subtle)] mt-2">{selectedItem.date.split("T")[0]}</p>
 
             <div className="flex gap-3 mt-6">
               <button
-                onClick={handleCancel}
+                onClick={handleWithdrawal}
                 className="
                   flex-1 py-2
                   bg-[var(--color-accent)]

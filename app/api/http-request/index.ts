@@ -46,6 +46,16 @@ const HTTPRequestAPI = {
           headers: { Authorization: `Bearer ${accessToken}` },
         });
     },
+    patch: (url: string, data: any, accessToken: string, config?: AxiosConfigType) => {
+      if (config) {
+        if (config.headers) config.headers.Authorization = `Bearer ${accessToken}`;
+        else config.headers = { Authorization: `Bearer ${accessToken}` };
+        return axios.patch(parseAPIRequestURL(url), data, config);
+      } else
+        return axios.patch(parseAPIRequestURL(url), data, {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        });
+    },
   },
 };
 

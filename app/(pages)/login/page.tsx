@@ -23,8 +23,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen w-full bg-[var(--color-background)] flex flex-col items-center">
-
-      {/* 상단 일러스트 + 곡선 배경, 나중에 적당한 사진 찾아서 추가할 것 */ }
+      {/* 상단 일러스트 + 곡선 배경, 나중에 적당한 사진 찾아서 추가할 것 */}
       <div className="w-full relative">
         <div className="w-full h-[260px] bg-[var(--color-primary-light)] rounded-b-[50px] flex justify-center items-center">
           <img
@@ -38,10 +37,7 @@ export default function LoginPage() {
       {/* 로그인 카드 */}
       <div className="w-full max-w-md mt-[-40px] px-6">
         <div className="bg-[var(--color-surface)] rounded-[20px] shadow-[var(--shadow-md)] px-6 py-10">
-
-          <h1 className="text-center text-2xl font-bold text-[var(--color-text)]">
-            Login
-          </h1>
+          <h1 className="text-center text-2xl font-bold text-[var(--color-text)]">Login</h1>
           <p className="text-center text-sm text-[var(--color-text-muted)] mb-8">
             Please sign in to continue.
           </p>
@@ -91,9 +87,7 @@ export default function LoginPage() {
               Sign in
             </button>
           </form>
-
         </div>
-
       </div>
     </div>
   );
