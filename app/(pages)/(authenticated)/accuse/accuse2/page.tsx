@@ -163,7 +163,7 @@ export default function SelectStudentPage() {
           }
         `}
       >
-        다음
+        기소를 완료하기
       </button>
     </div>
   );
