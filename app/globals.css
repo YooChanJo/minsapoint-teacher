@@ -1,33 +1,115 @@
 @import "tailwindcss";
 
+/* ------------------------------
+   Base Light Theme Variables
+--------------------------------*/
 :root {
+  /* system background / foreground */
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Colors: light mode */
+  --color-primary: #1A1A1A;
+  --color-primary-hover: #333333;
+  --color-primary-active: #000000;
+
+  --color-secondary: #858e9bff;
+  --color-secondary-hover: #d2dae4ff;
+  --color-secondary-active: #eaeffbff;
+
+  --color-accent: #d00909ff;
+  --color-accent-hover: #c65555ff;
+  --color-accent-active: #fc0909ff;
+
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+
+  --color-text: #111111;
+  --color-text-muted: #555555;
+  --color-text-subtle: #777777;
+
+  --color-background: #e4f4f5ff;
+  --color-surface: #f5f5f5;
+  --color-border: #E6E6E6;
+
+  /* Borders */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Typography */
+  --font-sans: var(--font-ibm-plex-sans-kr);
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 24px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-
-  /* set tailwind's font-sans to your local font */
   --font-sans: var(--font-ibm-plex-sans-kr);
 }
 
+/* ------------------------------
+   Dark Theme Variables
+--------------------------------*/
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
+    /* Colors: dark mode */
+    --color-primary: #f0f2ffff;
+    --color-primary-hover: #c7cdecff;
+    --color-primary-active: #ffffffff;
+
+    --color-secondary: #67e8f9;
+    --color-secondary-hover: #22d3ee;
+    --color-secondary-active: #0e7490;
+
+    --color-accent: #fc0909ff;
+    --color-accent-hover: #c65555ff;
+    --color-accent-active: #d00909ff;
+
+    --color-success: #4ade80;
+    --color-warning: #facc15;
+    --color-error: #f87171;
+    --color-info: #60a5fa;
+
+    --color-text: #f5f5f5;
+    --color-text-muted: #c1c1c1;
+    --color-text-subtle: #9ca3af;
+
+    --color-background: #111111;
+    --color-surface: #1e1e1e;
+    --color-border: #2d2d2d;
   }
 }
 
-/* IMPORTANT: use the CSS variable injected by next/font/local */
+/* ------------------------------
+   Base Global Font + Background
+--------------------------------*/
 body {
   background: var(--background);
   color: var(--foreground);
 
   font-family:
     var(--font-ibm-plex-sans-kr),
-    /* your Next.js localFont */ Helvetica,
+    Helvetica,
     Arial,
     sans-serif;
 }
