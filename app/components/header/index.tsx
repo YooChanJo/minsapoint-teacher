@@ -21,8 +21,8 @@ export default function Header() {
   }, [accessToken]);
 
   return (
-<header
-  className="
+    <header
+      className="
     w-full
     fixed top-0 left-0 z-50
     border-b
@@ -30,12 +30,11 @@ export default function Header() {
     px-4 py-3
     shadow-sm
   "
-  style={{
-    backgroundColor: "var(--color-surface)",
-    borderColor: "var(--color-border)",
-  }}
->
-
+      style={{
+        backgroundColor: "var(--color-surface)",
+        borderColor: "var(--color-border)",
+      }}
+    >
       {/* Left Section - Logo */}
       <Link href="/" className="flex items-center gap-2 group">
         <h1
@@ -59,12 +58,8 @@ export default function Header() {
         style={{
           backgroundColor: "transparent",
         }}
-        onMouseEnter={(e) =>
-          (e.currentTarget.style.backgroundColor = "var(--color-secondary-hover)")
-        }
-        onMouseLeave={(e) =>
-          (e.currentTarget.style.backgroundColor = "transparent")
-        }
+        onMouseEnter={e => (e.currentTarget.style.backgroundColor = "var(--color-secondary-hover)")}
+        onMouseLeave={e => (e.currentTarget.style.backgroundColor = "transparent")}
       >
         {/* Avatar */}
         <div
@@ -79,10 +74,7 @@ export default function Header() {
         </div>
 
         {/* Name */}
-        <span
-          className="text-sm"
-          style={{ color: "var(--color-text)" }}
-        >
+        <span className="text-sm" style={{ color: "var(--color-text)" }}>
           {name ? `${name} 선생님` : "Loading..."}
         </span>
       </Link>
